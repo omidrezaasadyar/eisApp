@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Bootstrap theme used by the Activity before Compose takes over. -->
-    <style name="Theme.EIS" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Bootstrap theme used by the Activity before Compose takes over.
+         Inherits from AppCompat (which we already depend on); the live
+         theme is defined in Kotlin via EISTheme. -->
+    <style name="Theme.EIS" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
