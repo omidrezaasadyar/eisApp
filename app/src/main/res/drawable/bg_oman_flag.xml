@@ -1,0 +1,33 @@
+<!--
+    Simplified Oman national flag.
+    Layout: vertical red panel on the hoist (left, ~25% width), three
+    equal horizontal stripes on the fly side (white / red / green).
+    The national emblem (khanjar) is omitted — at the low alpha used
+    on the splash background it would not be readable.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="120dp"
+    android:viewportWidth="180"
+    android:viewportHeight="120">
+
+    <!-- White (top stripe of the fly side) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,0 L180,0 L180,40 L45,40 Z" />
+
+    <!-- Red (middle stripe of the fly side) -->
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M45,40 L180,40 L180,80 L45,80 Z" />
+
+    <!-- Green (bottom stripe of the fly side) -->
+    <path
+        android:fillColor="#008542"
+        android:pathData="M45,80 L180,80 L180,120 L45,120 Z" />
+
+    <!-- Vertical red panel on the hoist side -->
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M0,0 L45,0 L45,120 L0,120 Z" />
+</vector>

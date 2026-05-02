@@ -3,14 +3,14 @@ package com.eis.oman.presentation.screens.services
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Analytics
-import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.Construction
 import androidx.compose.material.icons.outlined.Engineering
 import androidx.compose.material.icons.outlined.Factory
 import androidx.compose.material.icons.outlined.Hub
 import androidx.compose.material.icons.outlined.Insights
-import androidx.compose.material.icons.outlined.Inventory2
+import androidx.compose.material.icons.outlined.LocalShipping
+import androidx.compose.material.icons.outlined.PrecisionManufacturing
 import androidx.compose.material.icons.outlined.Terminal
-import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.eis.oman.R
 import com.eis.oman.domain.model.ServiceId
@@ -56,12 +56,12 @@ fun ServiceId.descRes(): Int = when (this) {
 
 fun ServiceId.icon(): ImageVector = when (this) {
     ServiceId.INDUSTRIAL_SOFTWARE -> Icons.Outlined.Terminal
-    ServiceId.AUTOMATION -> Icons.Outlined.Tune
+    ServiceId.AUTOMATION -> Icons.Outlined.PrecisionManufacturing
     ServiceId.AI_DATA -> Icons.Outlined.Insights
     ServiceId.INTEGRATION_MIDDLEWARE -> Icons.Outlined.Hub
     ServiceId.ENGINEERING_CONSULTING -> Icons.Outlined.Engineering
     ServiceId.MONITORING_KPI -> Icons.Outlined.Analytics
-    ServiceId.EQUIPMENT_TRADING -> Icons.Outlined.Inventory2
-    ServiceId.INSTALLATION_COMMISSIONING -> Icons.Outlined.Build
+    ServiceId.EQUIPMENT_TRADING -> Icons.Outlined.LocalShipping
+    ServiceId.INSTALLATION_COMMISSIONING -> Icons.Outlined.Construction
     ServiceId.SMART_FACTORY -> Icons.Outlined.Factory
 }
