@@ -34,10 +34,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
 
-        // Contact endpoints — replace via secrets.properties or here when finalised.
-        buildConfigField("String", "EIS_PHONE_E164", "\"${secret("EIS_PHONE_E164", "+96800000000")}\"")
-        buildConfigField("String", "EIS_WHATSAPP_E164", "\"${secret("EIS_WHATSAPP_E164", "+96800000000")}\"")
-        buildConfigField("String", "EIS_EMAIL", "\"${secret("EIS_EMAIL", "info@eis.om")}\"")
+        // Contact endpoints — overridable via secrets.properties at the repo root.
+        buildConfigField("String", "EIS_PHONE_E164", "\"${secret("EIS_PHONE_E164", "+96877685441")}\"")
+        buildConfigField("String", "EIS_WHATSAPP_E164", "\"${secret("EIS_WHATSAPP_E164", "+96877685441")}\"")
+        buildConfigField("String", "EIS_EMAIL", "\"${secret("EIS_EMAIL", "info@eisindustry.com")}\"")
+        buildConfigField("String", "EIS_EMAIL_SUPPORT", "\"${secret("EIS_EMAIL_SUPPORT", "app@eisindustry.com")}\"")
+        buildConfigField("String", "EIS_WEBSITE_URL", "\"${secret("EIS_WEBSITE_URL", "https://www.eisindustry.com")}\"")
 
         resourceConfigurations += listOf("en", "ar")
     }

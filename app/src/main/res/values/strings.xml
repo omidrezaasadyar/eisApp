@@ -21,14 +21,40 @@
     <string name="service_detail_placeholder">Service detail for: %1$s</string>
 
     <string name="service_industrial_software">Industrial Software &amp; Digital Solutions</string>
+    <string name="service_industrial_software_short">Custom Level 2, analytics, and decision-support software for heavy industry.</string>
+    <string name="service_industrial_software_desc">We design and build advanced software for heavy industries — especially steel, energy, and manufacturing. Our solutions span Level 2 systems, process data analytics, management dashboards, and decision-support tools. The goal is to raise productivity, cut energy consumption, and give plant management complete visibility of operations. Every system is custom-built to match the real conditions of the plant.</string>
+
     <string name="service_automation">Automation &amp; Process Optimization</string>
+    <string name="service_automation_short">Tune lines, cut energy use, and improve KPIs like Tap-to-Tap Time.</string>
+    <string name="service_automation_desc">Engineering services to optimise the performance of production lines: process analysis, tuning of operating parameters, reduction of electricity and gas consumption, and improvement of key indicators such as Tap-to-Tap Time in steelmaking. We integrate with PLCs and Level 1 systems to give operators tighter, more accurate control.</string>
+
     <string name="service_ai_data">AI &amp; Data Intelligence for Industry</string>
+    <string name="service_ai_data_short">ML for prediction, fault detection, and predictive maintenance.</string>
+    <string name="service_ai_data_desc">Advanced algorithms and machine learning applied to industrial prediction and optimisation: temperature forecasting, material-consumption prediction, fault detection, and predictive maintenance. The goal is to turn raw plant data into actionable insights for managers and operators.</string>
+
     <string name="service_integration_middleware">Industrial Integration &amp; Middleware Solutions</string>
+    <string name="service_integration_middleware_short">Connect PLC, SCADA, ERP, and MES through OPC UA middleware.</string>
+    <string name="service_integration_middleware_desc">We design and implement the communication layers between industrial systems (PLC, SCADA, ERP, MES). This includes a custom middleware — comparable in scope to Kepware — providing an OPC UA server and tag management. Data flows across the organisation in a standard, secure, and reliable way.</string>
+
     <string name="service_engineering_consulting">Engineering Consulting &amp; Technical Services</string>
+    <string name="service_engineering_consulting_short">Feasibility, control-system design, ROI, and tender documentation.</string>
+    <string name="service_engineering_consulting_desc">Consulting for the design, optimisation, and execution of industrial projects: feasibility studies, control-system design, ROI analysis, and tender documentation. Focus on practical, executable solutions in real industrial conditions — not theory alone.</string>
+
     <string name="service_monitoring_kpi">Monitoring, KPI &amp; Decision Support Systems</string>
+    <string name="service_monitoring_kpi_short">Real-time dashboards for production, energy, quality, and KPIs.</string>
+    <string name="service_monitoring_kpi_desc">Real-time monitoring of production status, energy consumption, quality, and equipment performance. Professional dashboards let managers make fast, accurate decisions. Definition and tracking of key KPIs — Yield, Energy per Ton, Downtime — is a core capability.</string>
+
     <string name="service_equipment_trading">Industrial Equipment Trading &amp; Supply</string>
+    <string name="service_equipment_trading_short">IGBT, fuses, sensors, automation parts — sourced and supplied.</string>
+    <string name="service_equipment_trading_desc">Sourcing and supply of industrial equipment: IGBT modules, industrial fuses, automation gear, sensors, and specialty parts. A supply network spanning Europe, China, the UAE, and Oman delivers competitive pricing and guaranteed authenticity.</string>
+
     <string name="service_installation_commissioning">Installation, Commissioning &amp; Support</string>
+    <string name="service_installation_commissioning_short">Install, commission, train, and support — end to end.</string>
+    <string name="service_installation_commissioning_desc">End-to-end services from installation through commissioning to long-term support: testing, calibration, operator training, and maintenance. The goal is stable, uninterrupted operation in the industrial environment.</string>
+
     <string name="service_smart_factory">Smart Factory &amp; Industry 4.0 Solutions</string>
+    <string name="service_smart_factory_short">Connect, collect, analyse, automate — Industry 4.0 in practice.</string>
+    <string name="service_smart_factory_desc">Implementation of advanced digitalisation: equipment connectivity, real-time data acquisition, intelligent analytics, and automated decision-making. Positions clients with a future-ready roadmap and EIS as a next-generation industrial solutions provider.</string>
 
     <!-- Request -->
     <string name="request_placeholder">Service request form will appear here.</string>
@@ -48,8 +74,16 @@
     <string name="error_generic">Something went wrong. Please try again.</string>
 
     <!-- About / Contact / Settings -->
-    <string name="about_placeholder">About EIS — company description goes here.</string>
-    <string name="contact_placeholder">Contact options: WhatsApp, phone, email.</string>
+    <string name="about_title">About EIS</string>
+    <string name="about_body">Effective &amp; Innovative Solutions (EIS) is an Oman-based industrial software and automation company. We deliver custom Level 2 systems, AI-driven analytics, OPC UA middleware, and Industry 4.0 solutions for heavy industries — especially steel, energy, and manufacturing.</string>
+    <string name="about_visit_website">Visit our website</string>
+    <string name="contact_title">Contact</string>
+    <string name="contact_body">Reach our engineering team via WhatsApp, phone, or email. We respond on business days within 24 hours.</string>
+    <string name="contact_address_label">Address</string>
+    <string name="contact_address_value">Sultanate of Oman</string>
+    <string name="contact_phone_label">Phone</string>
+    <string name="contact_email_label">Email</string>
+    <string name="contact_website_label">Website</string>
     <string name="settings_placeholder">Language and theme preferences.</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_en">English</string>
@@ -76,4 +110,8 @@
     <string name="action_back">Back</string>
     <string name="action_close">Close</string>
     <string name="action_retry">Retry</string>
+
+    <!-- Brand endpoints (display copies; runtime values come from BuildConfig) -->
+    <string name="eis_website_url" translatable="false">https://www.eisindustry.com</string>
+    <string name="eis_website_display" translatable="false">www.eisindustry.com</string>
 </resources>

@@ -21,14 +21,40 @@
     <string name="service_detail_placeholder">تفاصيل الخدمة: %1$s</string>
 
     <string name="service_industrial_software">البرمجيات الصناعية والحلول الرقمية</string>
+    <string name="service_industrial_software_short">برمجيات Level 2 وتحليلات وأنظمة دعم القرار للصناعات الثقيلة.</string>
+    <string name="service_industrial_software_desc">نُصمّم ونطوّر برمجيات متقدمة للصناعات الثقيلة — لا سيما الفولاذ والطاقة والتصنيع. تشمل الحلول أنظمة المستوى الثاني (Level 2)، وتحليل بيانات العمليات، ولوحات معلومات إدارية، وأدوات دعم القرار. الهدف هو رفع الإنتاجية، وخفض استهلاك الطاقة، ومنح الإدارة رؤية شاملة للعمليات. كل نظام يُبنى بشكل مُخصَّص ليتوافق مع الظروف الفعلية للمصنع.</string>
+
     <string name="service_automation">الأتمتة وتحسين العمليات</string>
+    <string name="service_automation_short">ضبط الخطوط، وخفض استهلاك الطاقة، وتحسين مؤشرات مثل Tap-to-Tap.</string>
+    <string name="service_automation_desc">خدمات هندسية لتحسين أداء خطوط الإنتاج: تحليل العمليات، وضبط معاملات التشغيل، وخفض استهلاك الكهرباء والغاز، وتحسين مؤشرات رئيسية مثل زمن الصب (Tap-to-Tap) في صناعة الفولاذ. ندعم التكامل مع وحدات PLC وأنظمة المستوى الأول لتمكين تحكم تشغيلي أدق.</string>
+
     <string name="service_ai_data">الذكاء الاصطناعي وذكاء البيانات للصناعة</string>
+    <string name="service_ai_data_short">تعلم آلي للتنبؤ، واكتشاف الأعطال، والصيانة التنبؤية.</string>
+    <string name="service_ai_data_desc">خوارزميات متقدمة وتعلم آلي للتنبؤ وتحسين العمليات الصناعية: التنبؤ بدرجات الحرارة، واستهلاك المواد، واكتشاف الأعطال، والصيانة التنبؤية. الهدف هو تحويل البيانات الصناعية الخام إلى رؤى قابلة للتنفيذ للمدراء والمشغلين.</string>
+
     <string name="service_integration_middleware">حلول التكامل والوسيط البرمجي الصناعي</string>
+    <string name="service_integration_middleware_short">ربط PLC وSCADA وERP وMES عبر وسيط برمجي بمعيار OPC UA.</string>
+    <string name="service_integration_middleware_desc">نُصمّم وننفّذ طبقات الاتصال بين الأنظمة الصناعية (PLC، SCADA، ERP، MES). يشمل ذلك تطوير وسيط برمجي مُخصَّص — بنطاق مشابه لـ Kepware — يقدّم خادم OPC UA وإدارة الوسوم. الهدف: تدفق البيانات عبر المنشأة بصورة معيارية وآمنة وموثوقة.</string>
+
     <string name="service_engineering_consulting">الاستشارات الهندسية والخدمات الفنية</string>
+    <string name="service_engineering_consulting_short">جدوى، وتصميم تحكم، وتحليل ROI، وإعداد وثائق المناقصات.</string>
+    <string name="service_engineering_consulting_desc">استشارات لتصميم وتحسين وتنفيذ المشاريع الصناعية: دراسات الجدوى، وتصميم أنظمة التحكم، وتحليل العائد على الاستثمار (ROI)، وإعداد الوثائق الفنية للمناقصات. التركيز على حلول عملية قابلة للتنفيذ في الظروف الصناعية الواقعية، لا على النظرية وحدها.</string>
+
     <string name="service_monitoring_kpi">المراقبة ومؤشرات الأداء وأنظمة دعم القرار</string>
+    <string name="service_monitoring_kpi_short">لوحات معلومات لحظية للإنتاج والطاقة والجودة ومؤشرات الأداء.</string>
+    <string name="service_monitoring_kpi_desc">مراقبة لحظية لحالة الإنتاج، واستهلاك الطاقة، والجودة، وأداء المعدات. تتيح لوحات معلومات احترافية للمدراء اتخاذ قرارات سريعة ودقيقة. كما يشكّل تعريف ومتابعة مؤشرات الأداء الرئيسية (Yield، Energy per Ton، Downtime) قدرة محورية في هذا القسم.</string>
+
     <string name="service_equipment_trading">تجارة وتوريد المعدات الصناعية</string>
+    <string name="service_equipment_trading_short">IGBT، ومصاهر، وأجهزة استشعار، وقطع أتمتة — تأمين وتوريد.</string>
+    <string name="service_equipment_trading_desc">تأمين وتوريد المعدات الصناعية: وحدات IGBT، والمصاهر الصناعية، ومعدات الأتمتة، وأجهزة الاستشعار، والقطع الخاصة. شبكة توريد تمتد عبر أوروبا والصين والإمارات وسلطنة عُمان، تُتيح أسعارًا تنافسية وأصالة مضمونة.</string>
+
     <string name="service_installation_commissioning">التركيب والتشغيل والدعم</string>
+    <string name="service_installation_commissioning_short">التركيب والتشغيل والتدريب والدعم — من البداية حتى الاستقرار.</string>
+    <string name="service_installation_commissioning_desc">خدمات متكاملة من التركيب إلى التشغيل والدعم طويل الأمد: الاختبار، والمعايرة، وتدريب المشغلين، والصيانة. الهدف هو تشغيل مستقر دون انقطاع في البيئة الصناعية.</string>
+
     <string name="service_smart_factory">المصنع الذكي وحلول الصناعة 4.0</string>
+    <string name="service_smart_factory_short">ربط، وجمع بيانات، وتحليل ذكي، وأتمتة — Industry 4.0 على أرض الواقع.</string>
+    <string name="service_smart_factory_desc">تطبيق مفاهيم الرقمنة المتقدمة: ربط المعدات، وجمع البيانات في الزمن الحقيقي، والتحليل الذكي، وأتمتة اتخاذ القرار. يضع هذا القسم EIS في موقع مزوّد للجيل القادم من الحلول الصناعية، ويرسم لعملائنا خارطة طريق مستقبلية.</string>
 
     <!-- Request -->
     <string name="request_placeholder">سيظهر هنا نموذج طلب الخدمة.</string>
@@ -48,8 +74,16 @@
     <string name="error_generic">حدث خطأ ما. يرجى المحاولة مرة أخرى.</string>
 
     <!-- About / Contact / Settings -->
-    <string name="about_placeholder">عن EIS — يُكتب هنا تعريف الشركة.</string>
-    <string name="contact_placeholder">قنوات التواصل: واتساب، الهاتف، البريد الإلكتروني.</string>
+    <string name="about_title">عن EIS</string>
+    <string name="about_body">«الحلول الفعّالة والمبتكرة» (EIS) شركة عُمانية متخصصة في البرمجيات الصناعية والأتمتة. نقدّم أنظمة Level 2 المُخصَّصة، وتحليلات مدفوعة بالذكاء الاصطناعي، وحلول الوسيط البرمجي بمعيار OPC UA، وتطبيقات الصناعة 4.0 للصناعات الثقيلة — لا سيما الفولاذ والطاقة والتصنيع.</string>
+    <string name="about_visit_website">زيارة موقعنا</string>
+    <string name="contact_title">تواصل معنا</string>
+    <string name="contact_body">تواصل مع فريقنا الهندسي عبر واتساب أو الهاتف أو البريد الإلكتروني. نردّ في أيام العمل خلال 24 ساعة.</string>
+    <string name="contact_address_label">العنوان</string>
+    <string name="contact_address_value">سلطنة عُمان</string>
+    <string name="contact_phone_label">الهاتف</string>
+    <string name="contact_email_label">البريد الإلكتروني</string>
+    <string name="contact_website_label">الموقع الإلكتروني</string>
     <string name="settings_placeholder">إعدادات اللغة والمظهر.</string>
     <string name="settings_language">اللغة</string>
     <string name="settings_language_en">English</string>

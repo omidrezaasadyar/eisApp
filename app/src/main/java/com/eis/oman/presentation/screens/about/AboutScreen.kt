@@ -8,8 +8,8 @@ import com.eis.oman.presentation.components.PlaceholderScaffold
 @Composable
 fun AboutScreen(onBack: () -> Unit) {
     PlaceholderScaffold(
-        title = stringResource(R.string.nav_about),
-        body = stringResource(R.string.about_placeholder),
+        title = stringResource(R.string.about_title),
+        body = stringResource(R.string.about_body),
         onBack = onBack,
     )
 }

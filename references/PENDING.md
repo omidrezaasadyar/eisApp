@@ -3,9 +3,6 @@
 These files are placeholders. Populate them with information from the
 company once available:
 
-- `services.md` — needs the canonical English and Arabic descriptions for
-  each of the nine service lines (currently we ship only the short
-  service titles in `res/values*/strings.xml`).
 - `architecture.md` — describe Hilt graph, ViewModel pattern, navigation,
   testing approach (already implemented in code; document it here).
 - `ui-theme.md` — capture colour roles, typography ramp, shapes, motion
