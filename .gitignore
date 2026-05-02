@@ -17,6 +17,7 @@ captures/
 *.class
 *.jar
 out/
+!gradle/wrapper/gradle-wrapper.jar
 
 # OS
 .DS_Store
