@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652828485824",
+    "project_id": "eisapp-33c6f",
+    "storage_bucket": "eisapp-33c6f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652828485824:android:4e93217d858de49130e525",
+        "android_client_info": {
+          "package_name": "com.eis.oman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvwF-jC1EpZ_ukSG6Hp2PWXFPv_-nuv2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
