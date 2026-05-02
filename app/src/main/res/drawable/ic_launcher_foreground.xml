@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Placeholder mark: stylised "E" in safety amber on the steel-blue
+         adaptive background. Replace with the official EIS mark when supplied. -->
+    <path
+        android:fillColor="#F5A524"
+        android:pathData="M36,32 H72 V42 H46 V50 H68 V60 H46 V68 H72 V78 H36 Z" />
+</vector>

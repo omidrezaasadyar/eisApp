@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <string name="app_name">EIS</string>
+    <string name="brand_full_name">الحلول الفعّالة والمبتكرة</string>
+    <string name="brand_tagline">برمجيات صناعية وأتمتة — سلطنة عُمان</string>
+
+    <!-- Navigation -->
+    <string name="nav_services">الخدمات</string>
+    <string name="nav_request">طلب خدمة</string>
+    <string name="nav_about">عن الشركة</string>
+    <string name="nav_contact">تواصل معنا</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Home -->
+    <string name="home_intro">برمجيات صناعية وحلول أتمتة وتحوّل صناعي للعملاء في الصناعات الثقيلة.</string>
+
+    <!-- Services -->
+    <string name="services_placeholder">سيتم عرض خدمات EIS التسع هنا.</string>
+    <string name="service_detail_title">الخدمة</string>
+    <string name="service_detail_placeholder">تفاصيل الخدمة: %1$s</string>
+
+    <string name="service_industrial_software">البرمجيات الصناعية والحلول الرقمية</string>
+    <string name="service_automation">الأتمتة وتحسين العمليات</string>
+    <string name="service_ai_data">الذكاء الاصطناعي وذكاء البيانات للصناعة</string>
+    <string name="service_integration_middleware">حلول التكامل والوسيط البرمجي الصناعي</string>
+    <string name="service_engineering_consulting">الاستشارات الهندسية والخدمات الفنية</string>
+    <string name="service_monitoring_kpi">المراقبة ومؤشرات الأداء وأنظمة دعم القرار</string>
+    <string name="service_equipment_trading">تجارة وتوريد المعدات الصناعية</string>
+    <string name="service_installation_commissioning">التركيب والتشغيل والدعم</string>
+    <string name="service_smart_factory">المصنع الذكي وحلول الصناعة 4.0</string>
+
+    <!-- Request -->
+    <string name="request_placeholder">سيظهر هنا نموذج طلب الخدمة.</string>
+    <string name="request_full_name">الاسم الكامل</string>
+    <string name="request_company">الشركة</string>
+    <string name="request_email">البريد الإلكتروني</string>
+    <string name="request_phone">رقم الهاتف</string>
+    <string name="request_message">كيف يمكننا مساعدتك؟</string>
+    <string name="request_submit">إرسال</string>
+    <string name="request_submitted">تم إرسال طلبك. سيتواصل معك فريقنا قريبًا.</string>
+
+    <!-- Validation -->
+    <string name="error_full_name_required">يرجى إدخال الاسم الكامل.</string>
+    <string name="error_contact_required">يرجى تزويدنا ببريد إلكتروني أو رقم هاتف.</string>
+    <string name="error_invalid_email">يرجى إدخال بريد إلكتروني صحيح.</string>
+    <string name="error_message_too_short">يرجى وصف احتياجك بـ 10 أحرف على الأقل.</string>
+    <string name="error_generic">حدث خطأ ما. يرجى المحاولة مرة أخرى.</string>
+
+    <!-- About / Contact / Settings -->
+    <string name="about_placeholder">عن EIS — يُكتب هنا تعريف الشركة.</string>
+    <string name="contact_placeholder">قنوات التواصل: واتساب، الهاتف، البريد الإلكتروني.</string>
+    <string name="settings_placeholder">إعدادات اللغة والمظهر.</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_language_ar">العربية</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="settings_theme_system">حسب النظام</string>
+    <string name="settings_theme_light">فاتح</string>
+    <string name="settings_theme_dark">داكن</string>
+
+    <!-- Contact actions -->
+    <string name="action_whatsapp">فتح واتساب</string>
+    <string name="action_call">اتصال</string>
+    <string name="action_email">بريد إلكتروني</string>
+    <string name="whatsapp_prefilled_message">مرحبًا EIS، أنا مهتم بـ: %1$s</string>
+    <string name="whatsapp_prefilled_general">مرحبًا EIS، أرغب بمزيد من المعلومات.</string>
+    <string name="error_no_handler">لا يوجد تطبيق متاح لتنفيذ هذا الإجراء.</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_default_id">eis_default</string>
+    <string name="notif_channel_default_name">تحديثات EIS</string>
+    <string name="notif_channel_default_desc">تحديثات الخدمات والردود من EIS.</string>
+
+    <!-- Generic -->
+    <string name="action_back">رجوع</string>
+    <string name="action_close">إغلاق</string>
+    <string name="action_retry">إعادة المحاولة</string>
+</resources>

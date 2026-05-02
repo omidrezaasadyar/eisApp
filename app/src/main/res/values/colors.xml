@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirrors of the Compose theme tokens for Android system surfaces
+         (status/nav bar, ripple defaults). Keep in sync with Color.kt. -->
+    <color name="brand_steel_blue_900">#FF0B2545</color>
+    <color name="brand_steel_blue_700">#FF13315C</color>
+    <color name="brand_safety_amber">#FFF5A524</color>
+    <color name="brand_graphite_900">#FF0E1116</color>
+    <color name="brand_off_white">#FFF6F7F9</color>
+</resources>

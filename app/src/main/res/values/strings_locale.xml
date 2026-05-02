@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tells androidx.appcompat which locales the app ships translations for.
+         Used by the per-app language picker on Android 13+. -->
+    <string-array name="supported_locales" tools:ignore="MissingTranslation">
+        <item>en</item>
+        <item>ar</item>
+    </string-array>
+</resources>
