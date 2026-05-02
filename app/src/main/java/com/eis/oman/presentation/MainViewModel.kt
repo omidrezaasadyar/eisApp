@@ -2,45 +2,33 @@ package com.eis.oman.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eis.oman.core.LocaleManager
 import com.eis.oman.domain.model.AppLanguage
 import com.eis.oman.domain.model.ThemeMode
 import com.eis.oman.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 
 data class MainUiState(
-    val useDarkTheme: Boolean = true,
+    val themeMode: ThemeMode = ThemeMode.DARK,
     val language: AppLanguage = AppLanguage.ENGLISH,
 )
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val settingsRepository: SettingsRepository,
+    settingsRepository: SettingsRepository,
+    localeManager: LocaleManager,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(MainUiState())
-    val state: StateFlow<MainUiState> = _state.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            combine(
-                settingsRepository.themeMode(),
-                settingsRepository.language(),
-            ) { theme, lang ->
-                MainUiState(
-                    useDarkTheme = when (theme) {
-                        ThemeMode.DARK -> true
-                        ThemeMode.LIGHT -> false
-                        ThemeMode.SYSTEM -> true
-                    },
-                    language = lang,
-                )
-            }.collect { _state.value = it }
-        }
-    }
+    val state: StateFlow<MainUiState> = combine(
+        settingsRepository.themeMode(),
+        settingsRepository.language(),
+    ) { theme, lang -> MainUiState(themeMode = theme, language = lang) }
+        .onEach { localeManager.apply(it.language) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MainUiState())
 }
