@@ -15,7 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Send
-import androidx.compose.material.icons.outlined.WhatsApp
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
@@ -170,7 +171,10 @@ private fun ServiceDetailContent(
                 onClick = { onWhatsApp(whatsappText) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Icon(Icons.Outlined.WhatsApp, contentDescription = null)
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_whatsapp),
+                    contentDescription = null,
+                )
                 Text(
                     text = stringResource(R.string.action_whatsapp),
                     modifier = Modifier.padding(start = 8.dp),

@@ -12,7 +12,8 @@ import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material.icons.outlined.WhatsApp
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -87,7 +88,7 @@ fun ContactScreen(
             ContactRow(
                 label = stringResource(R.string.action_whatsapp),
                 value = viewModel.contactInfo.whatsappE164,
-                icon = Icons.Outlined.WhatsApp,
+                icon = ImageVector.vectorResource(R.drawable.ic_whatsapp),
                 onClick = { viewModel.onWhatsAppClick(whatsAppGreeting) },
             )
             ContactRow(
