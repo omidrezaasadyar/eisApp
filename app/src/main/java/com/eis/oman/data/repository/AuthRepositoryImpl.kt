@@ -42,8 +42,8 @@ class AuthRepositoryImpl @Inject constructor(
      */
     override val currentUser: Flow<User?> = uidFlow()
         .flatMapLatest { uid ->
-            if (uid == null) flowOf(null)
-            else flow {
+            if (uid == null) flowOf<User?>(null)
+            else flow<User?> {
                 emit(fetchProfile(uid) ?: minimalUser(uid))
             }
         }
