@@ -1,8 +1,10 @@
 package com.eis.oman.di
 
+import com.eis.oman.data.repository.AuthRepositoryImpl
 import com.eis.oman.data.repository.ServiceRepositoryImpl
 import com.eis.oman.data.repository.ServiceRequestRepositoryImpl
 import com.eis.oman.data.repository.SettingsRepositoryImpl
+import com.eis.oman.domain.repository.AuthRepository
 import com.eis.oman.domain.repository.ServiceRepository
 import com.eis.oman.domain.repository.ServiceRequestRepository
 import com.eis.oman.domain.repository.SettingsRepository
@@ -27,4 +29,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 }

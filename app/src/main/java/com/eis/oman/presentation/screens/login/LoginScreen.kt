@@ -21,6 +21,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.AlternateEmail
 import androidx.compose.material.icons.outlined.Badge
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Phone
@@ -32,21 +34,18 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,6 +60,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eis.oman.R
+import com.eis.oman.domain.model.User
 
 @Composable
 fun LoginScreen(
@@ -68,19 +68,9 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
-    val snackbarHost = remember { SnackbarHostState() }
-    val pendingMessage = stringResource(R.string.login_pending)
-
-    LaunchedEffect(state.isSubmitted) {
-        if (state.isSubmitted) {
-            snackbarHost.showSnackbar(pendingMessage)
-            viewModel.resetSubmittedFlag()
-        }
-    }
 
     Scaffold(
         containerColor = Color.Transparent,
-        snackbarHost = { SnackbarHost(snackbarHost) },
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -100,122 +90,231 @@ fun LoginScreen(
             )
         }
     ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp, vertical = 12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        if (state.signedInUser != null) {
+            SignedInView(
+                user = state.signedInUser!!,
+                onSignOut = viewModel::signOut,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+            )
+        } else {
+            FormView(
+                form = state.form,
+                viewModel = viewModel,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+            )
+        }
+    }
+}
+
+@Composable
+private fun FormView(
+    form: LoginFormState,
+    viewModel: LoginViewModel,
+    modifier: Modifier,
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        HeroBadge()
+
+        Spacer(Modifier.height(20.dp))
+
+        Text(
+            text = stringResource(
+                if (form.mode == LoginMode.SIGN_IN) R.string.login_title
+                else R.string.signup_title
+            ),
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(Modifier.height(6.dp))
+        Text(
+            text = stringResource(
+                if (form.mode == LoginMode.SIGN_IN) R.string.login_subtitle
+                else R.string.signup_subtitle
+            ),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+        )
+
+        Spacer(Modifier.height(20.dp))
+
+        ModeSelector(mode = form.mode, onModeChange = viewModel::setMode)
+
+        Spacer(Modifier.height(20.dp))
+
+        AuthErrorBanner(error = form.authError, onDismiss = viewModel::dismissAuthError)
+
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.fillMaxWidth(),
         ) {
-            HeroBadge()
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                if (form.mode == LoginMode.SIGN_IN) {
+                    SignInFields(form = form, viewModel = viewModel)
+                } else {
+                    SignUpFields(form = form, viewModel = viewModel)
+                }
 
-            Spacer(Modifier.height(20.dp))
+                Spacer(Modifier.height(4.dp))
 
+                Button(
+                    onClick = viewModel::submit,
+                    enabled = !form.isSubmitting,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    AnimatedVisibility(
+                        visible = form.isSubmitting,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                    ) {
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            strokeWidth = 2.dp,
+                            modifier = Modifier.size(18.dp),
+                        )
+                    }
+                    if (!form.isSubmitting) {
+                        Text(
+                            text = stringResource(
+                                if (form.mode == LoginMode.SIGN_IN) R.string.login_button_signin
+                                else R.string.login_button_signup
+                            ),
+                        )
+                    }
+                }
+
+                if (form.mode == LoginMode.SIGN_IN) {
+                    TextButton(
+                        onClick = { /* future: forgot password */ },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.login_forgot_password))
+                    }
+                }
+            }
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        TextButton(
+            onClick = {
+                viewModel.setMode(
+                    if (form.mode == LoginMode.SIGN_IN) LoginMode.SIGN_UP
+                    else LoginMode.SIGN_IN
+                )
+            }
+        ) {
             Text(
                 text = stringResource(
-                    if (state.mode == LoginMode.SIGN_IN) R.string.login_title
-                    else R.string.signup_title
+                    if (form.mode == LoginMode.SIGN_IN) R.string.login_switch_to_signup
+                    else R.string.login_switch_to_signin
                 ),
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary,
             )
+        }
+
+        Spacer(Modifier.height(24.dp))
+    }
+}
+
+@Composable
+private fun SignedInView(
+    user: User,
+    onSignOut: () -> Unit,
+    modifier: Modifier,
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(Modifier.height(40.dp))
+
+        Surface(
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(96.dp),
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Icon(
+                    imageVector = Icons.Outlined.CheckCircle,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.size(56.dp),
+                )
+            }
+        }
+
+        Spacer(Modifier.height(20.dp))
+
+        val displayName = listOf(user.firstName, user.lastName)
+            .filter { it.isNotBlank() }
+            .joinToString(" ")
+            .ifBlank { user.email }
+        Text(
+            text = stringResource(R.string.dashboard_welcome, displayName),
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+        )
+        if (user.email.isNotBlank()) {
             Spacer(Modifier.height(6.dp))
             Text(
-                text = stringResource(
-                    if (state.mode == LoginMode.SIGN_IN) R.string.login_subtitle
-                    else R.string.signup_subtitle
-                ),
+                text = user.email,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
             )
+        }
 
-            Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(28.dp))
 
-            ModeSelector(
-                mode = state.mode,
-                onModeChange = viewModel::setMode,
-            )
-
-            Spacer(Modifier.height(20.dp))
-
-            Surface(
-                color = MaterialTheme.colorScheme.surface,
-                shape = MaterialTheme.shapes.large,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    if (state.mode == LoginMode.SIGN_IN) {
-                        SignInFields(state = state, viewModel = viewModel)
-                    } else {
-                        SignUpFields(state = state, viewModel = viewModel)
-                    }
-
-                    Spacer(Modifier.height(4.dp))
-
-                    Button(
-                        onClick = viewModel::submit,
-                        enabled = !state.isSubmitting,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        AnimatedVisibility(
-                            visible = state.isSubmitting,
-                            enter = fadeIn(),
-                            exit = fadeOut(),
-                        ) {
-                            CircularProgressIndicator(
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                strokeWidth = 2.dp,
-                                modifier = Modifier.size(18.dp),
-                            )
-                        }
-                        if (!state.isSubmitting) {
-                            Text(
-                                text = stringResource(
-                                    if (state.mode == LoginMode.SIGN_IN) R.string.login_button_signin
-                                    else R.string.login_button_signup
-                                ),
-                            )
-                        }
-                    }
-
-                    if (state.mode == LoginMode.SIGN_IN) {
-                        TextButton(
-                            onClick = { /* future: forgot password */ },
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Text(stringResource(R.string.login_forgot_password))
-                        }
-                    }
-                }
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            TextButton(
-                onClick = {
-                    viewModel.setMode(
-                        if (state.mode == LoginMode.SIGN_IN) LoginMode.SIGN_UP
-                        else LoginMode.SIGN_IN
-                    )
-                }
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Text(
-                    text = stringResource(
-                        if (state.mode == LoginMode.SIGN_IN) R.string.login_switch_to_signup
-                        else R.string.login_switch_to_signin
-                    ),
-                    color = MaterialTheme.colorScheme.primary,
+                    text = stringResource(R.string.dashboard_placeholder),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+        }
 
-            Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(24.dp))
+
+        OutlinedButton(
+            onClick = onSignOut,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Logout,
+                contentDescription = null,
+            )
+            Spacer(Modifier.size(8.dp))
+            Text(stringResource(R.string.dashboard_sign_out))
         }
     }
 }
@@ -245,9 +344,7 @@ private fun ModeSelector(
     mode: LoginMode,
     onModeChange: (LoginMode) -> Unit,
 ) {
-    SingleChoiceSegmentedButtonRow(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
+    SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
         SegmentedButton(
             selected = mode == LoginMode.SIGN_IN,
             onClick = { onModeChange(LoginMode.SIGN_IN) },
@@ -262,68 +359,97 @@ private fun ModeSelector(
 }
 
 @Composable
-private fun SignInFields(state: LoginUiState, viewModel: LoginViewModel) {
+private fun AuthErrorBanner(error: AuthBannerKind?, onDismiss: () -> Unit) {
+    if (error == null) return
+    val resId = when (error) {
+        AuthBannerKind.InvalidCredentials -> R.string.auth_error_invalid_credentials
+        AuthBannerKind.UserNotFound -> R.string.auth_error_user_not_found
+        AuthBannerKind.EmailAlreadyInUse -> R.string.auth_error_email_in_use
+        AuthBannerKind.WeakPassword -> R.string.auth_error_weak_password
+        AuthBannerKind.InvalidEmail -> R.string.auth_error_invalid_email
+        AuthBannerKind.Network -> R.string.auth_error_network
+        AuthBannerKind.Unknown -> R.string.auth_error_unknown
+    }
+    Surface(
+        color = MaterialTheme.colorScheme.errorContainer,
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 12.dp),
+    ) {
+        Text(
+            text = stringResource(resId),
+            color = MaterialTheme.colorScheme.onErrorContainer,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+        )
+    }
+}
+
+@Composable
+private fun SignInFields(form: LoginFormState, viewModel: LoginViewModel) {
     LoginInputField(
-        value = state.username,
+        value = form.username,
         onValueChange = viewModel::onUsernameChange,
         label = stringResource(R.string.login_field_username),
         leadingIcon = Icons.Outlined.AlternateEmail,
         keyboardType = KeyboardType.Email,
         imeAction = ImeAction.Next,
-        error = state.errors[LoginField.Username],
+        error = form.fieldErrors[LoginField.Username],
     )
     PasswordField(
-        value = state.password,
+        value = form.password,
         onValueChange = viewModel::onPasswordChange,
-        visible = state.passwordVisible,
+        visible = form.passwordVisible,
         onToggleVisibility = viewModel::togglePasswordVisible,
-        error = state.errors[LoginField.Password],
+        error = form.fieldErrors[LoginField.Password],
         imeAction = ImeAction.Done,
     )
 }
 
 @Composable
-private fun SignUpFields(state: LoginUiState, viewModel: LoginViewModel) {
+private fun SignUpFields(form: LoginFormState, viewModel: LoginViewModel) {
     LoginInputField(
-        value = state.firstName,
+        value = form.firstName,
         onValueChange = viewModel::onFirstNameChange,
         label = stringResource(R.string.login_field_first_name),
         leadingIcon = Icons.Outlined.Person,
         imeAction = ImeAction.Next,
-        error = state.errors[LoginField.FirstName],
+        error = form.fieldErrors[LoginField.FirstName],
     )
     LoginInputField(
-        value = state.lastName,
+        value = form.lastName,
         onValueChange = viewModel::onLastNameChange,
         label = stringResource(R.string.login_field_last_name),
         leadingIcon = Icons.Outlined.Badge,
         imeAction = ImeAction.Next,
-        error = state.errors[LoginField.LastName],
+        error = form.fieldErrors[LoginField.LastName],
     )
     LoginInputField(
-        value = state.email,
+        value = form.email,
         onValueChange = viewModel::onEmailChange,
         label = stringResource(R.string.login_field_email),
         leadingIcon = Icons.Outlined.AlternateEmail,
         keyboardType = KeyboardType.Email,
         imeAction = ImeAction.Next,
-        error = state.errors[LoginField.Email],
+        error = form.fieldErrors[LoginField.Email],
     )
     LoginInputField(
-        value = state.phone,
+        value = form.phone,
         onValueChange = viewModel::onPhoneChange,
         label = stringResource(R.string.login_field_phone),
         leadingIcon = Icons.Outlined.Phone,
         keyboardType = KeyboardType.Phone,
         imeAction = ImeAction.Next,
-        error = state.errors[LoginField.Phone],
+        error = form.fieldErrors[LoginField.Phone],
     )
     PasswordField(
-        value = state.password,
+        value = form.password,
         onValueChange = viewModel::onPasswordChange,
-        visible = state.passwordVisible,
+        visible = form.passwordVisible,
         onToggleVisibility = viewModel::togglePasswordVisible,
-        error = state.errors[LoginField.Password],
+        error = form.fieldErrors[LoginField.Password],
         imeAction = ImeAction.Done,
     )
 }
@@ -411,6 +537,7 @@ private fun errorSupportingText(error: LoginErrorKind?): @Composable (() -> Unit
         LoginErrorKind.InvalidEmail -> R.string.login_email_invalid
         LoginErrorKind.InvalidPhone -> R.string.login_phone_invalid
         LoginErrorKind.ShortPassword -> R.string.login_password_short
+        LoginErrorKind.NotEnglish -> R.string.login_english_only
     }
     return { Text(stringResource(resId), color = MaterialTheme.colorScheme.error) }
 }

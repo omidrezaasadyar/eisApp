@@ -49,6 +49,21 @@
     <string name="login_email_invalid">Please enter a valid email</string>
     <string name="login_phone_invalid">Please enter a valid phone number</string>
     <string name="login_password_short">Password must be at least 6 characters</string>
+    <string name="login_english_only">For better registration, please use English letters and digits only.</string>
+
+    <!-- Dashboard (signed-in view) -->
+    <string name="dashboard_welcome">Welcome, %1$s</string>
+    <string name="dashboard_placeholder">Your dashboard data will appear here in a future update — projects, KPIs, request status, and more.</string>
+    <string name="dashboard_sign_out">Sign out</string>
+
+    <!-- Auth backend errors -->
+    <string name="auth_error_invalid_credentials">Invalid email or password.</string>
+    <string name="auth_error_user_not_found">No account found with these details.</string>
+    <string name="auth_error_email_in_use">This email is already registered. Sign in instead.</string>
+    <string name="auth_error_weak_password">Password is too weak. Use at least 6 characters with letters and digits.</string>
+    <string name="auth_error_invalid_email">Please enter a valid email address.</string>
+    <string name="auth_error_network">Network error. Check your connection and try again.</string>
+    <string name="auth_error_unknown">Something went wrong. Please try again.</string>
 
     <!-- Home -->
     <string name="home_intro">Industrial software, automation, and Industry 4.0 solutions for heavy-industry clients.</string>

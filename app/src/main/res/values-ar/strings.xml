@@ -49,6 +49,21 @@
     <string name="login_email_invalid">يرجى إدخال بريد إلكتروني صحيح</string>
     <string name="login_phone_invalid">يرجى إدخال رقم هاتف صحيح</string>
     <string name="login_password_short">يجب أن تكون كلمة المرور 6 أحرف على الأقل</string>
+    <string name="login_english_only">لتسجيل أدق، يُرجى استخدام الحروف والأرقام الإنجليزية فقط.</string>
+
+    <!-- Dashboard (signed-in view) -->
+    <string name="dashboard_welcome">مرحبًا، %1$s</string>
+    <string name="dashboard_placeholder">ستظهر بيانات لوحة التحكم هنا في تحديث لاحق — المشاريع ومؤشرات الأداء وحالة الطلبات والمزيد.</string>
+    <string name="dashboard_sign_out">تسجيل الخروج</string>
+
+    <!-- Auth backend errors -->
+    <string name="auth_error_invalid_credentials">البريد الإلكتروني أو كلمة المرور غير صحيحة.</string>
+    <string name="auth_error_user_not_found">لم يتم العثور على حساب بهذه البيانات.</string>
+    <string name="auth_error_email_in_use">هذا البريد الإلكتروني مسجّل بالفعل. سجّل الدخول بدلاً من إنشاء حساب.</string>
+    <string name="auth_error_weak_password">كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل مع حروف وأرقام.</string>
+    <string name="auth_error_invalid_email">يرجى إدخال بريد إلكتروني صحيح.</string>
+    <string name="auth_error_network">خطأ في الشبكة. تحقق من الاتصال وحاول مرة أخرى.</string>
+    <string name="auth_error_unknown">حدث خطأ ما. يرجى المحاولة مرة أخرى.</string>
 
     <!-- Home -->
     <string name="home_intro">برمجيات صناعية وحلول أتمتة وتحوّل صناعي للعملاء في الصناعات الثقيلة.</string>

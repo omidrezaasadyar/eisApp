@@ -1,5 +1,7 @@
 package com.eis.oman.di
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.firestore
@@ -23,6 +25,10 @@ object FirebaseModule {
             setLocalCacheSettings(persistentCacheSettings {})
         }
     }
+
+    @Provides
+    @Singleton
+    fun provideAuth(): FirebaseAuth = Firebase.auth
 
     @Provides
     @Singleton
