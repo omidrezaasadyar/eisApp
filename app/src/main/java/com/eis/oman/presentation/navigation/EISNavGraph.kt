@@ -27,7 +27,7 @@ import com.eis.oman.presentation.screens.services.ServicesScreen
 import com.eis.oman.presentation.screens.settings.SettingsScreen
 import com.eis.oman.presentation.screens.splash.SplashScreen
 
-private const val NAV_DURATION_MS = 280
+private const val NAV_DURATION_MS = 420
 
 @Composable
 fun EISNavGraph() {

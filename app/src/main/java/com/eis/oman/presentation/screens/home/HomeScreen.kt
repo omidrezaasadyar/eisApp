@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AlternateEmail
@@ -76,10 +75,9 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .statusBarsPadding()
                 .padding(horizontal = 12.dp),
         ) {
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(6.dp))
             TopBar()
             Spacer(Modifier.height(8.dp))
             HeroCard()
@@ -92,7 +90,7 @@ fun HomeScreen(
                 onEmail = { viewModel.onEmailClick(emailSubject) },
                 onAbout = { onOpenRoute(EISRoute.About.path) },
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(6.dp))
         }
     }
 }
