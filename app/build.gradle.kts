@@ -1,3 +1,4 @@
+import java.time.Year
 import java.util.Properties
 
 plugins {
@@ -41,7 +42,7 @@ android {
         buildConfigField("String", "EIS_EMAIL_SUPPORT", "\"${secret("EIS_EMAIL_SUPPORT", "app@eisindustry.com")}\"")
         buildConfigField("String", "EIS_WEBSITE_URL", "\"${secret("EIS_WEBSITE_URL", "https://www.eisindustry.com")}\"")
         // Build year — used by the About section in Settings.
-        buildConfigField("String", "BUILD_YEAR", "\"${java.time.Year.now().value}\"")
+        buildConfigField("String", "BUILD_YEAR", "\"${Year.now().value}\"")
 
         resourceConfigurations += listOf("en", "ar")
     }
