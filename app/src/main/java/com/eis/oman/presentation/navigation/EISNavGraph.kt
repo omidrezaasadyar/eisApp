@@ -1,12 +1,20 @@
 package com.eis.oman.presentation.navigation
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Campaign
+import androidx.compose.material.icons.outlined.Dashboard
+import androidx.compose.material.icons.outlined.Hub
+import androidx.compose.material.icons.outlined.Psychology
+import androidx.compose.material.icons.outlined.Workspaces
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.eis.oman.R
 import com.eis.oman.presentation.screens.about.AboutScreen
+import com.eis.oman.presentation.screens.coming_soon.ComingSoonScreen
 import com.eis.oman.presentation.screens.contact.ContactScreen
 import com.eis.oman.presentation.screens.home.HomeScreen
 import com.eis.oman.presentation.screens.request.RequestScreen
@@ -32,11 +40,9 @@ fun EISNavGraph() {
 
         composable(EISRoute.Home.path) {
             HomeScreen(
-                onOpenServices = { navController.navigate(EISRoute.Services.path) },
-                onOpenAbout = { navController.navigate(EISRoute.About.path) },
-                onOpenContact = { navController.navigate(EISRoute.Contact.path) },
-                onOpenSettings = { navController.navigate(EISRoute.Settings.path) },
-                onOpenRequest = { navController.navigate(EISRoute.Request.build()) },
+                onOpenRoute = { route ->
+                    navController.navigate(route)
+                },
             )
         }
 
@@ -87,6 +93,42 @@ fun EISNavGraph() {
 
         composable(EISRoute.Settings.path) {
             SettingsScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable(EISRoute.Projects.path) {
+            ComingSoonScreen(
+                titleRes = R.string.nav_projects,
+                icon = Icons.Outlined.Workspaces,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(EISRoute.Dashboard.path) {
+            ComingSoonScreen(
+                titleRes = R.string.nav_dashboard,
+                icon = Icons.Outlined.Dashboard,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(EISRoute.News.path) {
+            ComingSoonScreen(
+                titleRes = R.string.nav_news,
+                icon = Icons.Outlined.Campaign,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(EISRoute.TechHub.path) {
+            ComingSoonScreen(
+                titleRes = R.string.nav_tech_hub,
+                icon = Icons.Outlined.Hub,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(EISRoute.Agent.path) {
+            ComingSoonScreen(
+                titleRes = R.string.nav_agent,
+                icon = Icons.Outlined.Psychology,
+                onBack = { navController.popBackStack() },
+            )
         }
     }
 }

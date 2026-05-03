@@ -3,14 +3,26 @@
     <!-- Brand -->
     <string name="app_name">EIS</string>
     <string name="brand_full_name">Effective &amp; Innovative Solutions</string>
+    <string name="brand_full_name_long">Effective &amp; Innovative Solutions LLC</string>
     <string name="brand_tagline">Industrial Software &amp; Automation — Oman</string>
+    <string name="brand_motto">We Are Solution !</string>
 
     <!-- Navigation -->
     <string name="nav_services">Services</string>
-    <string name="nav_request">Request a Service</string>
+    <string name="nav_request">Request</string>
+    <string name="nav_projects">Projects</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_news">News</string>
+    <string name="nav_tech_hub">Tech Hub</string>
+    <string name="nav_agent">Agent</string>
     <string name="nav_about">About</string>
     <string name="nav_contact">Contact</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_settings">Setting</string>
+    <string name="nav_request_long">Request a Service</string>
+
+    <!-- Coming soon (for placeholder screens) -->
+    <string name="coming_soon_title">Coming Soon</string>
+    <string name="coming_soon_body">This section is under development and will be available in an upcoming release.</string>
 
     <!-- Home -->
     <string name="home_intro">Industrial software, automation, and Industry 4.0 solutions for heavy-industry clients.</string>

@@ -1,38 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-    Launcher icon foreground — same brand glyph as ic_eis_logo, scaled
-    and centered for the 108dp adaptive-icon canvas (66dp safe zone).
+    Adaptive icon foreground. Wraps the official EIS logo PNG with an
+    inset so the artwork sits within the 66dp safe zone of the 108dp
+    adaptive-icon canvas.
 -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-
-    <!-- Two thin vertical accent stripes on the hoist edge -->
-    <path
-        android:fillColor="#F5A524"
-        android:pathData="M30,38 L33,38 L33,82 L30,82 Z" />
-    <path
-        android:fillColor="#F5A524"
-        android:pathData="M37,38 L40,38 L40,82 L37,82 Z" />
-
-    <!-- Main rounded square (the "e" body) -->
-    <path
-        android:fillColor="#F5A524"
-        android:pathData="M48,38 L74,38 A5,5 0 0 1 79,43 L79,77 A5,5 0 0 1 74,82 L48,82 A5,5 0 0 1 43,77 L43,43 A5,5 0 0 1 48,38 Z" />
-
-    <!-- Square-spiral cutout in white inside the main shape -->
-    <path
-        android:fillColor="#0E1116"
-        android:pathData="M52,46 L72,46 L72,74 L56,74 L56,70 L68,70 L68,50 L56,50 L56,66 L60,66 L60,56 L64,56 L64,62 L60,62 L60,66 L52,66 Z" />
-
-    <!-- Accent rounded square -->
-    <path
-        android:fillColor="#F5A524"
-        android:pathData="M82,48 L88,48 A3,3 0 0 1 91,51 L91,82 A4,4 0 0 1 87,86 L82,86 A3,3 0 0 1 79,83 L79,51 A3,3 0 0 1 82,48 Z" />
-
-    <!-- Small dot above the accent square -->
-    <path
-        android:fillColor="#F5A524"
-        android:pathData="M83,30 L89,30 A2,2 0 0 1 91,32 L91,38 A2,2 0 0 1 89,40 L83,40 A2,2 0 0 1 81,38 L81,32 A2,2 0 0 1 83,30 Z" />
-</vector>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:inset="22%">
+    <bitmap
+        android:src="@drawable/ic_eis_logo"
+        android:gravity="center"
+        android:antialias="true" />
+</inset>
