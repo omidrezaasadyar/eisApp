@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Adaptive-icon foreground using the dedicated 1024x1024 square
-    launcher artwork. The bitmap fills the 108dp canvas; the launcher
-    mask (circle / squircle / rounded square) crops as needed. Because
-    the source artwork is already square with proper internal padding,
-    the icon reads cleanly across all launcher shapes.
+    launcher artwork. A small 6% inset keeps the artwork inside the
+    safe-zone of strict circular launcher masks (Pixel default uses
+    a 66dp circle inside the 108dp canvas; 6% inset shrinks the bitmap
+    just enough to avoid the corners being clipped).
 -->
-<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/ic_launcher_logo"
-    android:gravity="fill"
-    android:antialias="true" />
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:inset="6%">
+    <bitmap
+        android:src="@drawable/ic_launcher_logo"
+        android:gravity="fill"
+        android:antialias="true" />
+</inset>

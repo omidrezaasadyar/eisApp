@@ -24,6 +24,32 @@
     <string name="coming_soon_title">Coming Soon</string>
     <string name="coming_soon_body">This section is under development and will be available in an upcoming release.</string>
 
+    <!-- Login / Sign Up -->
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Sign in to access your dashboard</string>
+    <string name="signup_title">Create your account</string>
+    <string name="signup_subtitle">Join EIS to manage your industrial requests</string>
+    <string name="login_tab_signin">Sign In</string>
+    <string name="login_tab_signup">Sign Up</string>
+    <string name="login_field_username">Email or phone</string>
+    <string name="login_field_password">Password</string>
+    <string name="login_field_first_name">First name</string>
+    <string name="login_field_last_name">Last name</string>
+    <string name="login_field_email">Email</string>
+    <string name="login_field_phone">Phone number</string>
+    <string name="login_button_signin">Sign in</string>
+    <string name="login_button_signup">Create account</string>
+    <string name="login_switch_to_signup">Don\'t have an account? Sign up</string>
+    <string name="login_switch_to_signin">Already have an account? Sign in</string>
+    <string name="login_forgot_password">Forgot password?</string>
+    <string name="login_show_password">Show password</string>
+    <string name="login_hide_password">Hide password</string>
+    <string name="login_pending">Authentication backend will be wired in a follow-up update.</string>
+    <string name="login_field_required">This field is required</string>
+    <string name="login_email_invalid">Please enter a valid email</string>
+    <string name="login_phone_invalid">Please enter a valid phone number</string>
+    <string name="login_password_short">Password must be at least 6 characters</string>
+
     <!-- Home -->
     <string name="home_intro">Industrial software, automation, and Industry 4.0 solutions for heavy-industry clients.</string>
 

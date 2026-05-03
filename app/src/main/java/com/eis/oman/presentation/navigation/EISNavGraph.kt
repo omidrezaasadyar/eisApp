@@ -21,6 +21,7 @@ import com.eis.oman.presentation.screens.about.AboutScreen
 import com.eis.oman.presentation.screens.coming_soon.ComingSoonScreen
 import com.eis.oman.presentation.screens.contact.ContactScreen
 import com.eis.oman.presentation.screens.home.HomeScreen
+import com.eis.oman.presentation.screens.login.LoginScreen
 import com.eis.oman.presentation.screens.request.RequestScreen
 import com.eis.oman.presentation.screens.service_detail.ServiceDetailScreen
 import com.eis.oman.presentation.screens.services.ServicesScreen
@@ -143,11 +144,7 @@ fun EISNavGraph() {
             )
         }
         composable(EISRoute.Dashboard.path) {
-            ComingSoonScreen(
-                titleRes = R.string.nav_dashboard,
-                icon = Icons.Outlined.Dashboard,
-                onBack = { navController.popBackStack() },
-            )
+            LoginScreen(onBack = { navController.popBackStack() })
         }
         composable(EISRoute.News.path) {
             ComingSoonScreen(

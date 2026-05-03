@@ -24,6 +24,32 @@
     <string name="coming_soon_title">قريبًا</string>
     <string name="coming_soon_body">هذا القسم قيد التطوير وسيكون متاحًا في إصدار قادم.</string>
 
+    <!-- Login / Sign Up -->
+    <string name="login_title">مرحبًا بعودتك</string>
+    <string name="login_subtitle">سجّل الدخول للوصول إلى لوحة التحكم</string>
+    <string name="signup_title">إنشاء حساب</string>
+    <string name="signup_subtitle">انضم إلى EIS لإدارة طلباتك الصناعية</string>
+    <string name="login_tab_signin">تسجيل الدخول</string>
+    <string name="login_tab_signup">إنشاء حساب</string>
+    <string name="login_field_username">البريد الإلكتروني أو الهاتف</string>
+    <string name="login_field_password">كلمة المرور</string>
+    <string name="login_field_first_name">الاسم الأول</string>
+    <string name="login_field_last_name">اسم العائلة</string>
+    <string name="login_field_email">البريد الإلكتروني</string>
+    <string name="login_field_phone">رقم الهاتف</string>
+    <string name="login_button_signin">دخول</string>
+    <string name="login_button_signup">إنشاء حساب</string>
+    <string name="login_switch_to_signup">لا تملك حسابًا؟ سجّل الآن</string>
+    <string name="login_switch_to_signin">لديك حساب بالفعل؟ سجّل الدخول</string>
+    <string name="login_forgot_password">نسيت كلمة المرور؟</string>
+    <string name="login_show_password">إظهار كلمة المرور</string>
+    <string name="login_hide_password">إخفاء كلمة المرور</string>
+    <string name="login_pending">سيتم ربط نظام المصادقة في تحديث لاحق.</string>
+    <string name="login_field_required">هذا الحقل مطلوب</string>
+    <string name="login_email_invalid">يرجى إدخال بريد إلكتروني صحيح</string>
+    <string name="login_phone_invalid">يرجى إدخال رقم هاتف صحيح</string>
+    <string name="login_password_short">يجب أن تكون كلمة المرور 6 أحرف على الأقل</string>
+
     <!-- Home -->
     <string name="home_intro">برمجيات صناعية وحلول أتمتة وتحوّل صناعي للعملاء في الصناعات الثقيلة.</string>
 
