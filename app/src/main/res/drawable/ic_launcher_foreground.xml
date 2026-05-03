@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Adaptive icon foreground. Wraps the official EIS logo PNG with an
-    inset so the artwork sits within the 66dp safe zone of the 108dp
-    adaptive-icon canvas.
+    Adaptive-icon foreground. The bitmap fills the 108dp canvas; the
+    launcher mask (circle / squircle / square) crops as needed. The
+    logo is centered so the brand mark stays visible across launcher
+    shapes.
 -->
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:inset="22%">
-    <bitmap
-        android:src="@drawable/ic_eis_logo"
-        android:gravity="center"
-        android:antialias="true" />
-</inset>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/ic_eis_logo"
+    android:gravity="center|fill_horizontal"
+    android:antialias="true" />

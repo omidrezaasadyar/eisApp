@@ -3,6 +3,7 @@ package com.eis.oman.presentation.screens.home
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,11 +34,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eis.oman.R
@@ -111,13 +114,16 @@ private fun TopBar() {
             modifier = Modifier.fillMaxHeight(),
         ) {
             Box(
-                modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                modifier = Modifier
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
                     painter = painterResource(R.drawable.ic_eis_logo),
                     contentDescription = stringResource(R.string.app_name),
-                    modifier = Modifier.size(width = 50.dp, height = 36.dp),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(vertical = 2.dp),
                     contentScale = ContentScale.Fit,
                 )
             }
@@ -138,8 +144,11 @@ private fun TopBar() {
                 Text(
                     text = stringResource(R.string.brand_full_name),
                     color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Light,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    softWrap = false,
                 )
             }
         }
@@ -216,14 +225,14 @@ private fun MenuRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        MenuCard(
+        MenuButton(
             item = left,
             modifier = Modifier
                 .weight(1f)
                 .height(if (tall) 79.dp else 73.dp),
             onClick = { onOpen(left.route) },
         )
-        MenuCard(
+        MenuButton(
             item = right,
             modifier = Modifier
                 .weight(1f)
@@ -234,37 +243,22 @@ private fun MenuRow(
 }
 
 @Composable
-private fun MenuCard(
+private fun MenuButton(
     item: MenuItem,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
-    Surface(
-        onClick = onClick,
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        shape = RoundedCornerShape(12.dp),
-        modifier = modifier,
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick),
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 14.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text = stringResource(item.labelRes),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Medium,
-            )
-            Image(
-                painter = painterResource(item.iconRes),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.size(36.dp),
-            )
-        }
+        Image(
+            painter = painterResource(item.iconRes),
+            contentDescription = stringResource(item.labelRes),
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize(),
+        )
     }
 }
 
