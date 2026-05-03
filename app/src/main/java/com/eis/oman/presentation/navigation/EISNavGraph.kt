@@ -1,5 +1,11 @@
 package com.eis.oman.presentation.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIntoContainer
+import androidx.compose.animation.slideOutOfContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Campaign
 import androidx.compose.material.icons.outlined.Dashboard
@@ -23,12 +29,45 @@ import com.eis.oman.presentation.screens.services.ServicesScreen
 import com.eis.oman.presentation.screens.settings.SettingsScreen
 import com.eis.oman.presentation.screens.splash.SplashScreen
 
+private const val NAV_DURATION_MS = 280
+
 @Composable
 fun EISNavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = EISRoute.Splash.path) {
+    NavHost(
+        navController = navController,
+        startDestination = EISRoute.Splash.path,
+        enterTransition = {
+            slideIntoContainer(
+                towards = SlideDirection.Start,
+                animationSpec = tween(NAV_DURATION_MS),
+            ) + fadeIn(animationSpec = tween(NAV_DURATION_MS))
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                towards = SlideDirection.Start,
+                animationSpec = tween(NAV_DURATION_MS),
+            ) + fadeOut(animationSpec = tween(NAV_DURATION_MS))
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                towards = SlideDirection.End,
+                animationSpec = tween(NAV_DURATION_MS),
+            ) + fadeIn(animationSpec = tween(NAV_DURATION_MS))
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                towards = SlideDirection.End,
+                animationSpec = tween(NAV_DURATION_MS),
+            ) + fadeOut(animationSpec = tween(NAV_DURATION_MS))
+        },
+    ) {
 
-        composable(EISRoute.Splash.path) {
+        composable(
+            route = EISRoute.Splash.path,
+            // Splash fades out into the home — no slide motion.
+            exitTransition = { fadeOut(animationSpec = tween(NAV_DURATION_MS)) },
+        ) {
             SplashScreen(
                 onReady = {
                     navController.navigate(EISRoute.Home.path) {
@@ -38,7 +77,10 @@ fun EISNavGraph() {
             )
         }
 
-        composable(EISRoute.Home.path) {
+        composable(
+            route = EISRoute.Home.path,
+            enterTransition = { fadeIn(animationSpec = tween(NAV_DURATION_MS)) },
+        ) {
             HomeScreen(
                 onOpenRoute = { route ->
                     navController.navigate(route)

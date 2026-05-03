@@ -1,19 +1,23 @@
 package com.eis.oman.presentation.screens.home
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AlternateEmail
@@ -29,7 +33,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,33 +71,28 @@ fun HomeScreen(
     Scaffold(
         containerColor = Color.Transparent,
         snackbarHost = { SnackbarHost(snackbarHost) },
-        contentWindowInsets = WindowInsets(0),
     ) { padding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding),
+                .padding(padding)
+                .statusBarsPadding()
+                .padding(horizontal = 12.dp),
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 12.dp),
-            ) {
-                Spacer(Modifier.height(8.dp))
-                TopBar()
-                Spacer(Modifier.height(8.dp))
-                HeroCard()
-                Spacer(Modifier.height(8.dp))
-                MenuGrid(onOpen = onOpenRoute)
-                Spacer(Modifier.height(8.dp))
-                BottomActionBar(
-                    onCall = viewModel::onCallClick,
-                    onWebsite = viewModel::onWebsiteClick,
-                    onEmail = { viewModel.onEmailClick(emailSubject) },
-                    onAbout = { onOpenRoute(EISRoute.About.path) },
-                )
-                Spacer(Modifier.height(8.dp))
-            }
+            Spacer(Modifier.height(8.dp))
+            TopBar()
+            Spacer(Modifier.height(8.dp))
+            HeroCard()
+            Spacer(Modifier.height(8.dp))
+            MenuGrid(onOpen = onOpenRoute)
+            Spacer(Modifier.height(8.dp))
+            BottomActionBar(
+                onCall = viewModel::onCallClick,
+                onWebsite = viewModel::onWebsiteClick,
+                onEmail = { viewModel.onEmailClick(emailSubject) },
+                onAbout = { onOpenRoute(EISRoute.About.path) },
+            )
+            Spacer(Modifier.height(8.dp))
         }
     }
 }
@@ -133,13 +135,13 @@ private fun TopBar() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 12.dp),
+                    .padding(horizontal = 10.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = stringResource(R.string.brand_full_name),
                     color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Light,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -170,36 +172,60 @@ private fun HeroCard() {
 
 @Composable
 private fun MenuGrid(onOpen: (String) -> Unit) {
+    var visible by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { visible = true }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
     ) {
-        MenuRow(
-            left = MenuItem(R.string.nav_request, R.drawable.ic_menu_request, EISRoute.Request.build()),
-            right = MenuItem(R.string.nav_services, R.drawable.ic_menu_services, EISRoute.Services.path),
-            onOpen = onOpen,
-            tall = false,
-        )
-        MenuRow(
-            left = MenuItem(R.string.nav_projects, R.drawable.ic_menu_projects, EISRoute.Projects.path),
-            right = MenuItem(R.string.nav_dashboard, R.drawable.ic_menu_dashboard, EISRoute.Dashboard.path),
-            onOpen = onOpen,
-            tall = true,
-        )
-        MenuRow(
-            left = MenuItem(R.string.nav_news, R.drawable.ic_menu_news, EISRoute.News.path),
-            right = MenuItem(R.string.nav_tech_hub, R.drawable.ic_menu_tech_hub, EISRoute.TechHub.path),
-            onOpen = onOpen,
-            tall = true,
-        )
-        MenuRow(
-            left = MenuItem(R.string.nav_settings, R.drawable.ic_menu_settings, EISRoute.Settings.path),
-            right = MenuItem(R.string.nav_agent, R.drawable.ic_menu_agent, EISRoute.Agent.path),
-            onOpen = onOpen,
-            tall = true,
-        )
+        AnimatedRow(visible = visible, delayMs = 0) {
+            MenuRow(
+                left = MenuItem(R.string.nav_request, R.drawable.ic_menu_request, EISRoute.Request.build()),
+                right = MenuItem(R.string.nav_services, R.drawable.ic_menu_services, EISRoute.Services.path),
+                onOpen = onOpen,
+                tall = false,
+            )
+        }
+        AnimatedRow(visible = visible, delayMs = 80) {
+            MenuRow(
+                left = MenuItem(R.string.nav_projects, R.drawable.ic_menu_projects, EISRoute.Projects.path),
+                right = MenuItem(R.string.nav_dashboard, R.drawable.ic_menu_dashboard, EISRoute.Dashboard.path),
+                onOpen = onOpen,
+                tall = true,
+            )
+        }
+        AnimatedRow(visible = visible, delayMs = 160) {
+            MenuRow(
+                left = MenuItem(R.string.nav_news, R.drawable.ic_menu_news, EISRoute.News.path),
+                right = MenuItem(R.string.nav_tech_hub, R.drawable.ic_menu_tech_hub, EISRoute.TechHub.path),
+                onOpen = onOpen,
+                tall = true,
+            )
+        }
+        AnimatedRow(visible = visible, delayMs = 240) {
+            MenuRow(
+                left = MenuItem(R.string.nav_settings, R.drawable.ic_menu_settings, EISRoute.Settings.path),
+                right = MenuItem(R.string.nav_agent, R.drawable.ic_menu_agent, EISRoute.Agent.path),
+                onOpen = onOpen,
+                tall = true,
+            )
+        }
+    }
+}
+
+@Composable
+private fun AnimatedRow(visible: Boolean, delayMs: Int, content: @Composable () -> Unit) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInHorizontally(
+            animationSpec = tween(durationMillis = 420, delayMillis = delayMs),
+            initialOffsetX = { full -> full },
+        ) + fadeIn(animationSpec = tween(durationMillis = 420, delayMillis = delayMs)),
+    ) {
+        content()
     }
 }
 

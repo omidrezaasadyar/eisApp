@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -50,17 +51,21 @@ class MainActivity : AppCompatActivity() {
             EISTheme(darkTheme = darkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFF171C32),
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Box(modifier = Modifier.fillMaxSize()) {
-                        // App-wide background. The splash screen draws its own
-                        // full-bleed image on top, so the bg is hidden there.
-                        Image(
-                            painter = painterResource(R.drawable.screen_background),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize(),
-                        )
+                        // The dark navy bg art is part of the brand identity for
+                        // the dark theme. In light theme we let the surface
+                        // color fill instead so readable text on light surfaces
+                        // doesn't fight a dark image.
+                        if (darkTheme) {
+                            Image(
+                                painter = painterResource(R.drawable.screen_background),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize(),
+                            )
+                        }
                         EISNavGraph()
                     }
                 }
