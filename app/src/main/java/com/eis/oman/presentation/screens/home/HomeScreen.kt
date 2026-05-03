@@ -1,6 +1,6 @@
 package com.eis.oman.presentation.screens.home
 
-import androidx.compose.foundation.Canvas
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,16 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AlternateEmail
 import androidx.compose.material.icons.outlined.Call
-import androidx.compose.material.icons.outlined.Campaign
-import androidx.compose.material.icons.outlined.Dashboard
-import androidx.compose.material.icons.outlined.Description
-import androidx.compose.material.icons.outlined.Hub
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.MiscellaneousServices
-import androidx.compose.material.icons.outlined.Psychology
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Workspaces
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -41,11 +33,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -84,10 +71,6 @@ fun HomeScreen(
                 .padding(padding)
                 .background(MaterialTheme.colorScheme.background),
         ) {
-            Canvas(modifier = Modifier.fillMaxSize()) {
-                drawHomeGrid(spacingPx = 32.dp.toPx(), alpha = 0.04f)
-            }
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -117,7 +100,8 @@ private fun TopBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp),
+            .height(70.dp)
+            .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -171,40 +155,12 @@ private fun HeroCard() {
             .fillMaxWidth()
             .height(230.dp),
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.radialGradient(
-                        colors = listOf(
-                            Color(0xFF2A1F1A),
-                            MaterialTheme.colorScheme.surface,
-                        ),
-                        radius = 600f,
-                    )
-                ),
-            contentAlignment = Alignment.Center,
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(220.dp)
-                    .clip(RoundedCornerShape(110.dp))
-                    .background(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.18f),
-                                Color.Transparent,
-                            ),
-                        )
-                    ),
-            )
-            Image(
-                painter = painterResource(R.drawable.ic_eis_logo),
-                contentDescription = null,
-                modifier = Modifier.size(width = 200.dp, height = 140.dp),
-                contentScale = ContentScale.Fit,
-            )
-        }
+        Image(
+            painter = painterResource(R.drawable.home_hero),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+        )
     }
 }
 
@@ -217,26 +173,26 @@ private fun MenuGrid(onOpen: (String) -> Unit) {
             .padding(vertical = 4.dp),
     ) {
         MenuRow(
-            left = MenuItem(R.string.nav_request, Icons.Outlined.Description, EISRoute.Request.build()),
-            right = MenuItem(R.string.nav_services, Icons.Outlined.MiscellaneousServices, EISRoute.Services.path),
+            left = MenuItem(R.string.nav_request, R.drawable.ic_menu_request, EISRoute.Request.build()),
+            right = MenuItem(R.string.nav_services, R.drawable.ic_menu_services, EISRoute.Services.path),
             onOpen = onOpen,
             tall = false,
         )
         MenuRow(
-            left = MenuItem(R.string.nav_projects, Icons.Outlined.Workspaces, EISRoute.Projects.path),
-            right = MenuItem(R.string.nav_dashboard, Icons.Outlined.Dashboard, EISRoute.Dashboard.path),
+            left = MenuItem(R.string.nav_projects, R.drawable.ic_menu_projects, EISRoute.Projects.path),
+            right = MenuItem(R.string.nav_dashboard, R.drawable.ic_menu_dashboard, EISRoute.Dashboard.path),
             onOpen = onOpen,
             tall = true,
         )
         MenuRow(
-            left = MenuItem(R.string.nav_news, Icons.Outlined.Campaign, EISRoute.News.path),
-            right = MenuItem(R.string.nav_tech_hub, Icons.Outlined.Hub, EISRoute.TechHub.path),
+            left = MenuItem(R.string.nav_news, R.drawable.ic_menu_news, EISRoute.News.path),
+            right = MenuItem(R.string.nav_tech_hub, R.drawable.ic_menu_tech_hub, EISRoute.TechHub.path),
             onOpen = onOpen,
             tall = true,
         )
         MenuRow(
-            left = MenuItem(R.string.nav_settings, Icons.Outlined.Settings, EISRoute.Settings.path),
-            right = MenuItem(R.string.nav_agent, Icons.Outlined.Psychology, EISRoute.Agent.path),
+            left = MenuItem(R.string.nav_settings, R.drawable.ic_menu_settings, EISRoute.Settings.path),
+            right = MenuItem(R.string.nav_agent, R.drawable.ic_menu_agent, EISRoute.Agent.path),
             onOpen = onOpen,
             tall = true,
         )
@@ -245,7 +201,7 @@ private fun MenuGrid(onOpen: (String) -> Unit) {
 
 private data class MenuItem(
     val labelRes: Int,
-    val icon: ImageVector,
+    @DrawableRes val iconRes: Int,
     val route: String,
 )
 
@@ -302,10 +258,10 @@ private fun MenuCard(
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Medium,
             )
-            Icon(
-                imageVector = item.icon,
+            Image(
+                painter = painterResource(item.iconRes),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(36.dp),
             )
         }
@@ -364,21 +320,5 @@ private fun ActionPill(
                 modifier = Modifier.size(28.dp),
             )
         }
-    }
-}
-
-private fun DrawScope.drawHomeGrid(spacingPx: Float, alpha: Float) {
-    val color = Color.White.copy(alpha = alpha)
-    val w = size.width
-    val h = size.height
-    var x = 0f
-    while (x <= w) {
-        drawLine(color = color, start = Offset(x, 0f), end = Offset(x, h), strokeWidth = 0.5f)
-        x += spacingPx
-    }
-    var y = 0f
-    while (y <= h) {
-        drawLine(color = color, start = Offset(0f, y), end = Offset(w, y), strokeWidth = 0.5f)
-        y += spacingPx
     }
 }
