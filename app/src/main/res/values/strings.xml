@@ -65,6 +65,23 @@
     <string name="auth_error_network">Network error. Check your connection and try again.</string>
     <string name="auth_error_unknown">Something went wrong. Please try again.</string>
 
+    <!-- Forgot password -->
+    <string name="forgot_password_title">Reset password</string>
+    <string name="forgot_password_body">Enter the email associated with your account and we\'ll send you a link to reset your password.</string>
+    <string name="forgot_password_send">Send link</string>
+    <string name="forgot_password_cancel">Cancel</string>
+    <string name="forgot_password_success_title">Email sent</string>
+    <string name="forgot_password_success_body">A reset link has been sent to %1$s. Check your inbox (and spam folder) and follow the link to set a new password.</string>
+
+    <!-- About this app (Settings) -->
+    <string name="about_app_section">About this app</string>
+    <string name="about_app_version_label">Version</string>
+    <string name="about_app_version_value">%1$s</string>
+    <string name="about_app_year_label">Released</string>
+    <string name="about_app_developer_label">Developed by</string>
+    <string name="about_app_website_label">Website</string>
+    <string name="about_app_copyright">© %1$s %2$s. All rights reserved.</string>
+
     <!-- Home -->
     <string name="home_intro">Industrial software, automation, and Industry 4.0 solutions for heavy-industry clients.</string>
 

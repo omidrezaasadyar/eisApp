@@ -65,6 +65,23 @@
     <string name="auth_error_network">خطأ في الشبكة. تحقق من الاتصال وحاول مرة أخرى.</string>
     <string name="auth_error_unknown">حدث خطأ ما. يرجى المحاولة مرة أخرى.</string>
 
+    <!-- Forgot password -->
+    <string name="forgot_password_title">إعادة تعيين كلمة المرور</string>
+    <string name="forgot_password_body">أدخل البريد الإلكتروني المرتبط بحسابك وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.</string>
+    <string name="forgot_password_send">إرسال الرابط</string>
+    <string name="forgot_password_cancel">إلغاء</string>
+    <string name="forgot_password_success_title">تم إرسال البريد</string>
+    <string name="forgot_password_success_body">تم إرسال رابط إعادة التعيين إلى %1$s. تحقّق من صندوق الوارد (ومجلد الرسائل غير المرغوب فيها) واتبع الرابط لإعداد كلمة مرور جديدة.</string>
+
+    <!-- About this app (Settings) -->
+    <string name="about_app_section">عن هذا التطبيق</string>
+    <string name="about_app_version_label">الإصدار</string>
+    <string name="about_app_version_value">%1$s</string>
+    <string name="about_app_year_label">سنة الإصدار</string>
+    <string name="about_app_developer_label">المطوِّر</string>
+    <string name="about_app_website_label">الموقع الإلكتروني</string>
+    <string name="about_app_copyright">© %1$s %2$s. جميع الحقوق محفوظة.</string>
+
     <!-- Home -->
     <string name="home_intro">برمجيات صناعية وحلول أتمتة وتحوّل صناعي للعملاء في الصناعات الثقيلة.</string>
 

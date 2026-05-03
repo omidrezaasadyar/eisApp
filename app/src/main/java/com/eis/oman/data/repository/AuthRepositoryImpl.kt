@@ -87,6 +87,14 @@ class AuthRepositoryImpl @Inject constructor(
         auth.signOut()
     }
 
+    override suspend fun sendPasswordReset(email: String): Result<Unit> =
+        withContext(dispatchers.io) {
+            runCatching {
+                auth.sendPasswordResetEmail(email.trim()).await()
+                Unit
+            }.recoverCatching { throw it.toAuthError() }
+        }
+
     private fun uidFlow(): Flow<String?> = callbackFlow {
         val listener = FirebaseAuth.AuthStateListener { firebase ->
             trySend(firebase.currentUser?.uid)

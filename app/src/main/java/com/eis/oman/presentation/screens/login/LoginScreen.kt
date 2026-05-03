@@ -28,6 +28,7 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
@@ -108,6 +109,14 @@ fun LoginScreen(
             )
         }
     }
+
+    ForgotPasswordDialog(
+        state = state.forgotPassword,
+        onDismiss = viewModel::dismissForgotPassword,
+        onAcknowledge = viewModel::acknowledgeForgotPasswordSent,
+        onEmailChange = viewModel::onForgotEmailChange,
+        onSubmit = viewModel::submitForgotPassword,
+    )
 }
 
 @Composable
@@ -200,7 +209,7 @@ private fun FormView(
 
                 if (form.mode == LoginMode.SIGN_IN) {
                     TextButton(
-                        onClick = { /* future: forgot password */ },
+                        onClick = viewModel::showForgotPassword,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Text(stringResource(R.string.login_forgot_password))
@@ -526,6 +535,123 @@ private fun PasswordField(
         isError = error != null,
         supportingText = errorSupportingText(error),
         modifier = Modifier.fillMaxWidth(),
+    )
+}
+
+@Composable
+private fun ForgotPasswordDialog(
+    state: ForgotPasswordState,
+    onDismiss: () -> Unit,
+    onAcknowledge: () -> Unit,
+    onEmailChange: (String) -> Unit,
+    onSubmit: () -> Unit,
+) {
+    if (!state.visible) return
+
+    if (state.sentSuccessfully) {
+        AlertDialog(
+            onDismissRequest = onAcknowledge,
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.CheckCircle,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
+            title = { Text(stringResource(R.string.forgot_password_success_title)) },
+            text = {
+                Text(
+                    stringResource(R.string.forgot_password_success_body, state.email),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = onAcknowledge) {
+                    Text(stringResource(R.string.action_close))
+                }
+            },
+        )
+        return
+    }
+
+    val errorTextResId = when (state.authError) {
+        AuthBannerKind.UserNotFound -> R.string.auth_error_user_not_found
+        AuthBannerKind.InvalidEmail -> R.string.auth_error_invalid_email
+        AuthBannerKind.Network -> R.string.auth_error_network
+        AuthBannerKind.Unknown,
+        AuthBannerKind.InvalidCredentials,
+        AuthBannerKind.EmailAlreadyInUse,
+        AuthBannerKind.WeakPassword -> R.string.auth_error_unknown
+        null -> null
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        icon = {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
+        },
+        title = { Text(stringResource(R.string.forgot_password_title)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(
+                    text = stringResource(R.string.forgot_password_body),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                OutlinedTextField(
+                    value = state.email,
+                    onValueChange = onEmailChange,
+                    label = { Text(stringResource(R.string.login_field_email)) },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Outlined.AlternateEmail,
+                            contentDescription = null,
+                        )
+                    },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Done,
+                    ),
+                    isError = state.emailError != null,
+                    supportingText = errorSupportingText(state.emailError),
+                    enabled = !state.isSending,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                if (errorTextResId != null) {
+                    Text(
+                        text = stringResource(errorTextResId),
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = onSubmit,
+                enabled = !state.isSending,
+            ) {
+                if (state.isSending) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        strokeWidth = 2.dp,
+                        modifier = Modifier.size(16.dp),
+                    )
+                } else {
+                    Text(stringResource(R.string.forgot_password_send))
+                }
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss, enabled = !state.isSending) {
+                Text(stringResource(R.string.forgot_password_cancel))
+            }
+        },
     )
 }
 

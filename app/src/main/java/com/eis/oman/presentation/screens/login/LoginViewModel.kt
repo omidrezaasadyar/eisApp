@@ -52,9 +52,19 @@ data class LoginFormState(
     val authError: AuthBannerKind? = null,
 )
 
+data class ForgotPasswordState(
+    val visible: Boolean = false,
+    val email: String = "",
+    val isSending: Boolean = false,
+    val emailError: LoginErrorKind? = null,
+    val sentSuccessfully: Boolean = false,
+    val authError: AuthBannerKind? = null,
+)
+
 data class LoginUiState(
     val signedInUser: User? = null,
     val form: LoginFormState = LoginFormState(),
+    val forgotPassword: ForgotPasswordState = ForgotPasswordState(),
 )
 
 @HiltViewModel
@@ -63,12 +73,15 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val form = MutableStateFlow(LoginFormState())
+    private val forgot = MutableStateFlow(ForgotPasswordState())
 
     val state: StateFlow<LoginUiState> = combine(
         authRepository.currentUser,
         form,
-    ) { user, formState -> LoginUiState(signedInUser = user, form = formState) }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LoginUiState())
+        forgot,
+    ) { user, formState, forgotState ->
+        LoginUiState(signedInUser = user, form = formState, forgotPassword = forgotState)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), LoginUiState())
 
     fun setMode(mode: LoginMode) = form.update {
         it.copy(mode = mode, fieldErrors = emptyMap(), authError = null)
@@ -129,6 +142,55 @@ class LoginViewModel @Inject constructor(
 
     fun signOut() {
         viewModelScope.launch { authRepository.signOut() }
+    }
+
+    fun showForgotPassword() {
+        // Pre-fill with whichever email-ish field the user has typed.
+        val prefill = form.value.email.ifBlank { form.value.username }
+        forgot.value = ForgotPasswordState(visible = true, email = prefill)
+    }
+
+    fun dismissForgotPassword() {
+        forgot.value = ForgotPasswordState()
+    }
+
+    fun onForgotEmailChange(value: String) = forgot.update {
+        it.copy(email = value, emailError = null, authError = null)
+    }
+
+    fun submitForgotPassword() {
+        val current = forgot.value
+        if (current.isSending) return
+        val emailError = validateForgotEmail(current.email)
+        if (emailError != null) {
+            forgot.update { it.copy(emailError = emailError) }
+            return
+        }
+        forgot.update { it.copy(isSending = true, emailError = null, authError = null) }
+        viewModelScope.launch {
+            authRepository.sendPasswordReset(current.email)
+                .onSuccess {
+                    forgot.update {
+                        it.copy(isSending = false, sentSuccessfully = true)
+                    }
+                }
+                .onFailure { error ->
+                    forgot.update {
+                        it.copy(isSending = false, authError = error.toBanner())
+                    }
+                }
+        }
+    }
+
+    fun acknowledgeForgotPasswordSent() {
+        forgot.value = ForgotPasswordState()
+    }
+
+    private fun validateForgotEmail(email: String): LoginErrorKind? = when {
+        email.isBlank() -> LoginErrorKind.Required
+        !ENGLISH_BASIC.matches(email) -> LoginErrorKind.NotEnglish
+        !email.contains("@") || !email.contains(".") -> LoginErrorKind.InvalidEmail
+        else -> null
     }
 
     private fun validate(state: LoginFormState): Map<LoginField, LoginErrorKind> {
