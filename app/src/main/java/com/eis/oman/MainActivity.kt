@@ -5,14 +5,17 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eis.oman.domain.model.ThemeMode
 import com.eis.oman.presentation.MainViewModel
@@ -45,8 +48,21 @@ class MainActivity : AppCompatActivity() {
                 ThemeMode.SYSTEM -> systemDark
             }
             EISTheme(darkTheme = darkTheme) {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    EISNavGraph()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color(0xFF171C32),
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        // App-wide background. The splash screen draws its own
+                        // full-bleed image on top, so the bg is hidden there.
+                        Image(
+                            painter = painterResource(R.drawable.screen_background),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize(),
+                        )
+                        EISNavGraph()
+                    }
                 }
             }
         }

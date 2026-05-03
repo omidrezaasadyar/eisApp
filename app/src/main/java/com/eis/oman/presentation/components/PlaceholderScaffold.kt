@@ -25,6 +25,7 @@ fun PlaceholderScaffold(
     content: @Composable () -> Unit = {},
 ) {
     Scaffold(
+        containerColor = androidx.compose.ui.graphics.Color.Transparent,
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(title, style = MaterialTheme.typography.titleLarge) },

@@ -62,15 +62,14 @@ fun HomeScreen(
     }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         snackbarHost = { SnackbarHost(snackbarHost) },
         contentWindowInsets = WindowInsets(0),
     ) { padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .background(MaterialTheme.colorScheme.background),
+                .padding(padding),
         ) {
             Column(
                 modifier = Modifier
@@ -101,7 +100,7 @@ private fun TopBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)
+            .height(82.dp)
             .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -113,15 +112,13 @@ private fun TopBar() {
         ) {
             Box(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                    .padding(horizontal = 14.dp, vertical = 6.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
                     painter = painterResource(R.drawable.ic_eis_logo),
                     contentDescription = stringResource(R.string.app_name),
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(vertical = 2.dp),
+                    modifier = Modifier.fillMaxHeight(),
                     contentScale = ContentScale.Fit,
                 )
             }
@@ -142,7 +139,7 @@ private fun TopBar() {
                 Text(
                     text = stringResource(R.string.brand_full_name),
                     color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Light,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

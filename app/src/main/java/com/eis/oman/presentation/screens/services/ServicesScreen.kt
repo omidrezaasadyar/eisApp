@@ -36,6 +36,7 @@ fun ServicesScreen(
 ) {
     val state by viewModel.state.collectAsState()
     Scaffold(
+        containerColor = androidx.compose.ui.graphics.Color.Transparent,
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
