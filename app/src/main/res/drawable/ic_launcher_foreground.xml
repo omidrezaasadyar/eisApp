@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Adaptive-icon foreground. The brand mark is wider than tall, so we
-    place it explicitly in the centre of the 108dp canvas with a fixed
-    artwork box (78dp x 54dp). This keeps the mark within the 66dp safe
-    zone of the adaptive-icon spec while still filling the visible area
-    on rounded-square / squircle / circle launcher masks.
-
-    For a perfectly square launcher icon (matching other Play Store
-    apps), upload a 1024x1024 PNG with the logo padded inside as
-    ic_launcher_logo.png and we'll switch the foreground to use it.
+    Adaptive-icon foreground using the dedicated 1024x1024 square
+    launcher artwork. The bitmap fills the 108dp canvas; the launcher
+    mask (circle / squircle / rounded square) crops as needed. Because
+    the source artwork is already square with proper internal padding,
+    the icon reads cleanly across all launcher shapes.
 -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:gravity="center"
-        android:width="78dp"
-        android:height="54dp">
-        <bitmap
-            android:src="@drawable/ic_eis_logo"
-            android:antialias="true"
-            android:gravity="fill" />
-    </item>
-</layer-list>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/ic_launcher_logo"
+    android:gravity="fill"
+    android:antialias="true" />
